@@ -1,0 +1,17 @@
+name: KillSoundPlugin
+version: '${project.version}'
+main: com.github.shin_ideal.killsoundplugin.KillSoundPlugin
+api-version: '1.19'
+commands:
+  killsound:
+    permission: KillSoundPlugin.command.killsound
+    description: OpenKillSoundSelector
+    aliases: [ks]
+
+permissions:
+  KillSoundPlugin.command.killsound:
+    description: killsoundcommand
+    default: true
+  KillSoundPlugin.sound.*:
+    description: allkillsound
+    default: op
