@@ -39,7 +39,10 @@ public final class KillSoundPlugin extends JavaPlugin {
     }
 
     private void Load_Config() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        for(String stringUuid:getConfig().getConfigurationSection("Data").getKeys(false)){
+        if(getConfig().getConfigurationSection("Data")==null){
+            return;
+        }
+        for(String stringUuid:getConfig().getConfigurationSection("Data").getKeys(true)){
             Player player = (Player) getServer().getOfflinePlayer(UUID.fromString(stringUuid));
             KillSound killSound = (KillSound) Class.forName(getConfig().getString("Data."+stringUuid)).getDeclaredConstructor().newInstance();
             KillSoundManager.SetKillSound(player, killSound);
