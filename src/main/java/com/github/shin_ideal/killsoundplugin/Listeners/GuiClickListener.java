@@ -26,7 +26,7 @@ public class GuiClickListener implements Listener {
         String string = event.getCurrentItem().getItemMeta().getDisplayName();
         switch (string){
             case "None":
-                KillSoundManager.SetKillSound(player,null);
+                KillSoundManager.SetKillSound(player.getUniqueId(),null);
                 player.sendMessage(ChatColor.DARK_GREEN+"Select None");
                 break;
             case "Previous Page":
@@ -41,31 +41,31 @@ public class GuiClickListener implements Listener {
             //KillSounds
             case "Wolf":
                 if(PlayerHasPermission(player,"Wolf")) {
-                    KillSoundManager.SetKillSound(player, new WolfSound());
+                    KillSoundManager.SetKillSound(player.getUniqueId(), new WolfSound());
                     player.sendMessage(ChatColor.DARK_GREEN+"Select Wolf");
                 }
                 break;
             case "Goat Horn":
                 if(PlayerHasPermission(player,"GoatHorn")) {
-                    KillSoundManager.SetKillSound(player, new GoatHornSound());
+                    KillSoundManager.SetKillSound(player.getUniqueId(), new GoatHornSound());
                     player.sendMessage(ChatColor.DARK_GREEN+"Select Goat Horn");
                 }
                 break;
             case "Egg":
                 if(PlayerHasPermission(player,"Egg")) {
-                    KillSoundManager.SetKillSound(player, new EggSound());
+                    KillSoundManager.SetKillSound(player.getUniqueId(), new EggSound());
                     player.sendMessage(ChatColor.DARK_GREEN+"Select Egg");
                 }
                 break;
             case "Anvil":
                 if(PlayerHasPermission(player,"Anvil")) {
-                    KillSoundManager.SetKillSound(player, new AnvilSound());
+                    KillSoundManager.SetKillSound(player.getUniqueId(), new AnvilSound());
                     player.sendMessage(ChatColor.DARK_GREEN+"Select Anvil");
                 }
                 break;
             case "Burp":
                 if(PlayerHasPermission(player,"Burp")) {
-                    KillSoundManager.SetKillSound(player, new BurpSound());
+                    KillSoundManager.SetKillSound(player.getUniqueId(), new BurpSound());
                     player.sendMessage(ChatColor.DARK_GREEN+"Select Burp");
                 }
                 break;

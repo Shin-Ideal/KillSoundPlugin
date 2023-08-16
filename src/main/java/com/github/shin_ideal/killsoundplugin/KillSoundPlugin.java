@@ -42,10 +42,9 @@ public final class KillSoundPlugin extends JavaPlugin {
         if(getConfig().getConfigurationSection("Data")==null){
             return;
         }
-        for(String stringUuid:getConfig().getConfigurationSection("Data").getKeys(true)){
-            Player player = (Player) getServer().getOfflinePlayer(UUID.fromString(stringUuid));
+        for(String stringUuid:getConfig().getConfigurationSection("Data").getKeys(false)){
             KillSound killSound = (KillSound) Class.forName(getConfig().getString("Data."+stringUuid)).getDeclaredConstructor().newInstance();
-            KillSoundManager.SetKillSound(player, killSound);
+            KillSoundManager.SetKillSound(UUID.fromString(stringUuid), killSound);
         }
     }
 

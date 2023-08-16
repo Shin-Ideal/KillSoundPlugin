@@ -10,8 +10,8 @@ import java.util.UUID;
 public class KillSoundManager {
     private static Map<UUID, KillSound> killSoundMap = new HashMap<>();
 
-    public static void SetKillSound(Player player,KillSound killSound){
-        killSoundMap.put(player.getUniqueId(),killSound);
+    public static void SetKillSound(UUID uuid,KillSound killSound){
+        killSoundMap.put(uuid,killSound);
     }
 
     public static KillSound GetKillSound(Player player){
