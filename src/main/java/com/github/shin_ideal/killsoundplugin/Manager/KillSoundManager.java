@@ -14,8 +14,8 @@ public class KillSoundManager {
         killSoundMap.put(uuid,killSound);
     }
 
-    public static KillSound GetKillSound(Player player){
-        return  killSoundMap.get(player.getUniqueId());
+    public static KillSound GetKillSound(UUID uuid){
+        return  killSoundMap.get(uuid);
     }
 
     public static Map<UUID,KillSound> GetKillSoundMap(){

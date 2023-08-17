@@ -14,9 +14,9 @@ public class KillingPlayerListener implements Listener {
             return;
         }
         Player killer = player.getKiller();
-        if(KillSoundManager.GetKillSound(killer)==null) {
+        if(KillSoundManager.GetKillSound(killer.getUniqueId())==null) {
             return;
         }
-        KillSoundManager.GetKillSound(killer).play(player);
+        KillSoundManager.GetKillSound(killer.getUniqueId()).play(player);
     }
 }

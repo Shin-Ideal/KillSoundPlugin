@@ -50,8 +50,7 @@ public final class KillSoundPlugin extends JavaPlugin {
 
     private void Save_Config(){
         for(UUID uuid:KillSoundManager.GetKillSoundMap().keySet()){
-            Player player = (Player) getServer().getOfflinePlayer(uuid);
-            String killSoundName = KillSoundManager.GetKillSound(player).getClass().getName();
+            String killSoundName = KillSoundManager.GetKillSound(uuid).getClass().getName();
             getConfig().set("Data."+ uuid, killSoundName);
         }
         saveConfig();
