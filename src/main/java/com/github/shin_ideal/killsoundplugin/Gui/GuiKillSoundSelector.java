@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class GuiKillSoundSelector {
     private final static int GUIMAXPAGE = 1;
@@ -52,50 +53,24 @@ public class GuiKillSoundSelector {
         }
 
         //Wolf
-        {
-            ItemStack icon = new ItemStack(Material.BONE);
-            ItemMeta icon_meta = icon.getItemMeta();
-            icon_meta.setDisplayName("Wolf");
-            icon_meta.setLore(Arrays.asList("あおーん"));
-            icon.setItemMeta(icon_meta);
-            arrayInventory[0].setItem(9, icon);
-        }
+        SetGUIIcon(Material.BONE,"Wolf",Arrays.asList("あおーん"),0,9);
         //Goat Horn
-        {
-            ItemStack icon = new ItemStack(Material.GOAT_HORN);
-            ItemMeta icon_meta = icon.getItemMeta();
-            icon_meta.setDisplayName("Goat Horn");
-            icon_meta.setLore(Arrays.asList("ふぁふぁふぁふぁーん"));
-            icon.setItemMeta(icon_meta);
-            arrayInventory[0].setItem(10, icon);
-        }
+        SetGUIIcon(Material.GOAT_HORN,"Goat Horn",Arrays.asList("ふぁふぁふぁふぁーん"),0,10);
         //Egg
-        {
-            ItemStack icon = new ItemStack(Material.EGG);
-            ItemMeta icon_meta = icon.getItemMeta();
-            icon_meta.setDisplayName("Egg");
-            icon_meta.setLore(Arrays.asList("ぽっ"));
-            icon.setItemMeta(icon_meta);
-            arrayInventory[0].setItem(11, icon);
-        }
+        SetGUIIcon(Material.EGG,"Egg",Arrays.asList("ぽっ"),0,11);
         //Anvil
-        {
-            ItemStack icon = new ItemStack(Material.ANVIL);
-            ItemMeta icon_meta = icon.getItemMeta();
-            icon_meta.setDisplayName("Anvil");
-            icon_meta.setLore(Arrays.asList("Nexusを削った音ではない"));
-            icon.setItemMeta(icon_meta);
-            arrayInventory[0].setItem(12, icon);
-        }
+        SetGUIIcon(Material.ANVIL,"Anvil",Arrays.asList("Nexusを削った音ではない"),0,12);
         //Burp
-        {
-            ItemStack icon = new ItemStack(Material.COOKED_CHICKEN);
-            ItemMeta icon_meta = icon.getItemMeta();
-            icon_meta.setDisplayName("Burp");
-            icon_meta.setLore(Arrays.asList("げー"));
-            icon.setItemMeta(icon_meta);
-            arrayInventory[0].setItem(13, icon);
-        }
+        SetGUIIcon(Material.COOKED_CHICKEN,"Burp",Arrays.asList("げー"),0,13);
+    }
+
+    private static void SetGUIIcon(Material iconMaterial, String displayName, List<String> lore,int page,int index){
+        ItemStack icon = new ItemStack(iconMaterial);
+        ItemMeta icon_meta = icon.getItemMeta();
+        icon_meta.setDisplayName(displayName);
+        icon_meta.setLore(lore);
+        icon.setItemMeta(icon_meta);
+        arrayInventory[page].setItem(index, icon);
     }
 
     public static void OpenGUI(Player player,int page){
