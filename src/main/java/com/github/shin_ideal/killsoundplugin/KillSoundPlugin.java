@@ -5,7 +5,6 @@ import com.github.shin_ideal.killsoundplugin.Listeners.GuiClickListener;
 import com.github.shin_ideal.killsoundplugin.Listeners.KillingPlayerListener;
 import com.github.shin_ideal.killsoundplugin.Manager.KillSoundManager;
 import com.github.shin_ideal.killsoundplugin.Sounds.KillSound;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,49 +22,49 @@ public final class KillSoundPlugin extends JavaPlugin {
         saveDefaultConfig();
 
         try {
-            Load_Config();
+            loadConfigData();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        Load_Listeners();
-        Load_Commands();
+        loadListeners();
+        loadCommands();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        Save_Config();
+        saveConfigData();
         getLogger().info("Disable");
     }
 
-    private void Load_Config() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        if(getConfig().getConfigurationSection("Data")==null){
+    private void loadConfigData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        if (getConfig().getConfigurationSection("Data") == null) {
             return;
         }
-        for(String stringUuid:getConfig().getConfigurationSection("Data").getKeys(false)){
-            KillSound killSound = (KillSound) Class.forName(getConfig().getString("Data."+stringUuid)).getDeclaredConstructor().newInstance();
-            KillSoundManager.SetKillSound(UUID.fromString(stringUuid), killSound);
+        for (String stringUuid : getConfig().getConfigurationSection("Data").getKeys(false)) {
+            KillSound killSound = (KillSound) Class.forName(getConfig().getString("Data." + stringUuid)).getDeclaredConstructor().newInstance();
+            KillSoundManager.setKillSound(UUID.fromString(stringUuid), killSound);
         }
     }
 
-    private void Save_Config(){
-        for(UUID uuid:KillSoundManager.GetKillSoundMap().keySet()){
-            String killSoundName = KillSoundManager.GetKillSound(uuid).getClass().getName();
-            getConfig().set("Data."+ uuid, killSoundName);
+    private void saveConfigData() {
+        for (UUID uuid : KillSoundManager.getKillSoundMap().keySet()) {
+            String killSoundName = KillSoundManager.getKillSound(uuid).getClass().getName();
+            getConfig().set("Data." + uuid, killSoundName);
         }
         saveConfig();
     }
 
-    private void Load_Listeners() {
-        getServer().getPluginManager().registerEvents(new KillingPlayerListener(),this);
-        getServer().getPluginManager().registerEvents(new GuiClickListener(),this);
+    private void loadListeners() {
+        getServer().getPluginManager().registerEvents(new KillingPlayerListener(), this);
+        getServer().getPluginManager().registerEvents(new GuiClickListener(), this);
     }
 
-    private void Load_Commands() {
+    private void loadCommands() {
         getCommand("killsound").setExecutor(new KillSoundExecutor());
     }
 
-    public static KillSoundPlugin getInstance(){
+    public static KillSoundPlugin getInstance() {
         return instance;
     }
 }

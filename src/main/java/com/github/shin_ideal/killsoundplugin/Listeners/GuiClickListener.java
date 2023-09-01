@@ -12,61 +12,61 @@ import org.bukkit.inventory.Inventory;
 
 public class GuiClickListener implements Listener {
     @EventHandler
-    public void onGuiClick(InventoryClickEvent event){
+    public void onGuiClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Inventory inventory = event.getView().getTopInventory();
-        if(GuiKillSoundSelector.GetGUIPage(inventory)<0){
+        if (GuiKillSoundSelector.getGUIPage(inventory) < 0) {
             return;
         }
         event.setCancelled(true);
 
-        if(event.getCurrentItem()==null||event.getCurrentItem().getItemMeta()==null||event.getCurrentItem().getItemMeta().getDisplayName()==null){
+        if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().getDisplayName() == null) {
             return;
         }
         String string = event.getCurrentItem().getItemMeta().getDisplayName();
-        switch (string){
+        switch (string) {
             case "None":
-                KillSoundManager.SetKillSound(player.getUniqueId(),null);
-                player.sendMessage(ChatColor.DARK_GREEN+"Select None");
+                KillSoundManager.setKillSound(player.getUniqueId(), null);
+                player.sendMessage(ChatColor.DARK_GREEN + "Select None");
                 break;
             case "Previous Page":
-                int previousPage = GuiKillSoundSelector.GetGUIPage(inventory)>0?GuiKillSoundSelector.GetGUIPage(inventory)-1:GuiKillSoundSelector.getArrayInventory().length-1;
+                int previousPage = GuiKillSoundSelector.getGUIPage(inventory) > 0 ? GuiKillSoundSelector.getGUIPage(inventory) - 1 : GuiKillSoundSelector.getArrayInventory().length - 1;
                 player.openInventory(GuiKillSoundSelector.getArrayInventory()[previousPage]);
                 break;
             case "Next Page":
-                int nextPage = GuiKillSoundSelector.GetGUIPage(inventory)<GuiKillSoundSelector.getArrayInventory().length-1?GuiKillSoundSelector.GetGUIPage(inventory)+1:0;
+                int nextPage = GuiKillSoundSelector.getGUIPage(inventory) < GuiKillSoundSelector.getArrayInventory().length - 1 ? GuiKillSoundSelector.getGUIPage(inventory) + 1 : 0;
                 player.openInventory(GuiKillSoundSelector.getArrayInventory()[nextPage]);
                 break;
 
             //KillSounds
             case "Wolf":
-                if(PlayerHasPermission(player,"Wolf")) {
-                    KillSoundManager.SetKillSound(player.getUniqueId(), new WolfSound());
-                    player.sendMessage(ChatColor.DARK_GREEN+"Select Wolf");
+                if (playerHasPermission(player, "Wolf")) {
+                    KillSoundManager.setKillSound(player.getUniqueId(), new WolfSound());
+                    player.sendMessage(ChatColor.DARK_GREEN + "Select Wolf");
                 }
                 break;
             case "Goat Horn":
-                if(PlayerHasPermission(player,"GoatHorn")) {
-                    KillSoundManager.SetKillSound(player.getUniqueId(), new GoatHornSound());
-                    player.sendMessage(ChatColor.DARK_GREEN+"Select Goat Horn");
+                if (playerHasPermission(player, "GoatHorn")) {
+                    KillSoundManager.setKillSound(player.getUniqueId(), new GoatHornSound());
+                    player.sendMessage(ChatColor.DARK_GREEN + "Select Goat Horn");
                 }
                 break;
             case "Egg":
-                if(PlayerHasPermission(player,"Egg")) {
-                    KillSoundManager.SetKillSound(player.getUniqueId(), new EggSound());
-                    player.sendMessage(ChatColor.DARK_GREEN+"Select Egg");
+                if (playerHasPermission(player, "Egg")) {
+                    KillSoundManager.setKillSound(player.getUniqueId(), new EggSound());
+                    player.sendMessage(ChatColor.DARK_GREEN + "Select Egg");
                 }
                 break;
             case "Anvil":
-                if(PlayerHasPermission(player,"Anvil")) {
-                    KillSoundManager.SetKillSound(player.getUniqueId(), new AnvilSound());
-                    player.sendMessage(ChatColor.DARK_GREEN+"Select Anvil");
+                if (playerHasPermission(player, "Anvil")) {
+                    KillSoundManager.setKillSound(player.getUniqueId(), new AnvilSound());
+                    player.sendMessage(ChatColor.DARK_GREEN + "Select Anvil");
                 }
                 break;
             case "Burp":
-                if(PlayerHasPermission(player,"Burp")) {
-                    KillSoundManager.SetKillSound(player.getUniqueId(), new BurpSound());
-                    player.sendMessage(ChatColor.DARK_GREEN+"Select Burp");
+                if (playerHasPermission(player, "Burp")) {
+                    KillSoundManager.setKillSound(player.getUniqueId(), new BurpSound());
+                    player.sendMessage(ChatColor.DARK_GREEN + "Select Burp");
                 }
                 break;
             default:
@@ -75,11 +75,11 @@ public class GuiClickListener implements Listener {
 
     }
 
-    private boolean PlayerHasPermission(Player player, String permission){
-        if(player.hasPermission("KillSoundPlugin.sound.*")||player.hasPermission("KillSoundPlugin.sound."+permission)){
+    private boolean playerHasPermission(Player player, String permission) {
+        if (player.hasPermission("KillSoundPlugin.sound.*") || player.hasPermission("KillSoundPlugin.sound." + permission)) {
             return true;
-        }else {
-            player.sendMessage(ChatColor.RED +"You don't have permission");
+        } else {
+            player.sendMessage(ChatColor.RED + "You don't have permission");
             return false;
         }
     }

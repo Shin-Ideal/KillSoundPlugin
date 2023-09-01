@@ -9,12 +9,12 @@ import org.bukkit.entity.Player;
 public class KillSoundExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if(!(commandSender instanceof Player)) {
+        if (!(commandSender instanceof Player)) {
             commandSender.sendMessage("Player Only!");
             return false;
         }
         Player player = (Player) commandSender;
-        GuiKillSoundSelector.OpenGUI(player,0);
+        GuiKillSoundSelector.openGUI(player, 0);
         return true;
     }
 }

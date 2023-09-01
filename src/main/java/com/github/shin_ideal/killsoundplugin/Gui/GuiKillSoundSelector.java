@@ -16,55 +16,38 @@ public class GuiKillSoundSelector {
 
     static {
         arrayInventory = new Inventory[GUIMAXPAGE];
-        for(int page = 0; page < arrayInventory.length; page++) {
-            arrayInventory[page] = Bukkit.createInventory(null, 54, "KillSound "+(page+1)+"/"+GUIMAXPAGE);
+        for (int page = 0; page < arrayInventory.length; page++) {
+            arrayInventory[page] = Bukkit.createInventory(null, 54, "KillSound " + (page + 1) + "/" + GUIMAXPAGE);
             Inventory inventory = arrayInventory[page];
 
             for (int i = 0; i < inventory.getSize(); i++) {
                 if (i < 9 || 44 < i) {
                     if (i == 4) {
-                        ItemStack icon = new ItemStack(Material.BARRIER);
-                        ItemMeta icon_meta = icon.getItemMeta();
-                        icon_meta.setDisplayName("None");
-                        icon_meta.setLore(Arrays.asList("No Effect"));
-                        icon.setItemMeta(icon_meta);
-                        inventory.setItem(i, icon);
+                        setGUIIcon(Material.BARRIER, "None", Arrays.asList("No Effect"), page, i);
                     } else if (i == 45) {
-                        ItemStack icon = new ItemStack(Material.GREEN_STAINED_GLASS);
-                        ItemMeta icon_meta = icon.getItemMeta();
-                        icon_meta.setDisplayName("Previous Page");
-                        icon.setItemMeta(icon_meta);
-                        inventory.setItem(i, icon);
+                        setGUIIcon(Material.GREEN_STAINED_GLASS, "Previous Page", Arrays.asList(""), page, i);
                     } else if (i == 53) {
-                        ItemStack icon = new ItemStack(Material.GREEN_STAINED_GLASS);
-                        ItemMeta icon_meta = icon.getItemMeta();
-                        icon_meta.setDisplayName("Next Page");
-                        icon.setItemMeta(icon_meta);
-                        inventory.setItem(i, icon);
+                        setGUIIcon(Material.GREEN_STAINED_GLASS, "Next Page", Arrays.asList(""), page, i);
                     } else {
-                        ItemStack icon = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-                        ItemMeta icon_meta = icon.getItemMeta();
-                        icon_meta.setDisplayName(" ");
-                        icon.setItemMeta(icon_meta);
-                        inventory.setItem(i, icon);
+                        setGUIIcon(Material.GRAY_STAINED_GLASS_PANE, " ", Arrays.asList(""), page, i);
                     }
                 }
             }
         }
 
         //Wolf
-        SetGUIIcon(Material.BONE,"Wolf",Arrays.asList("あおーん"),0,9);
+        setGUIIcon(Material.BONE, "Wolf", Arrays.asList("あおーん"), 0, 9);
         //Goat Horn
-        SetGUIIcon(Material.GOAT_HORN,"Goat Horn",Arrays.asList("ふぁふぁふぁふぁーん"),0,10);
+        setGUIIcon(Material.GOAT_HORN, "Goat Horn", Arrays.asList("ふぁふぁふぁふぁーん"), 0, 10);
         //Egg
-        SetGUIIcon(Material.EGG,"Egg",Arrays.asList("ぽっ"),0,11);
+        setGUIIcon(Material.EGG, "Egg", Arrays.asList("ぽっ"), 0, 11);
         //Anvil
-        SetGUIIcon(Material.ANVIL,"Anvil",Arrays.asList("Nexusを削った音ではない"),0,12);
+        setGUIIcon(Material.ANVIL, "Anvil", Arrays.asList("Nexusを削った音ではない"), 0, 12);
         //Burp
-        SetGUIIcon(Material.COOKED_CHICKEN,"Burp",Arrays.asList("げー"),0,13);
+        setGUIIcon(Material.COOKED_CHICKEN, "Burp", Arrays.asList("げー"), 0, 13);
     }
 
-    private static void SetGUIIcon(Material iconMaterial, String displayName, List<String> lore,int page,int index){
+    private static void setGUIIcon(Material iconMaterial, String displayName, List<String> lore, int page, int index) {
         ItemStack icon = new ItemStack(iconMaterial);
         ItemMeta icon_meta = icon.getItemMeta();
         icon_meta.setDisplayName(displayName);
@@ -73,18 +56,18 @@ public class GuiKillSoundSelector {
         arrayInventory[page].setItem(index, icon);
     }
 
-    public static void OpenGUI(Player player,int page){
+    public static void openGUI(Player player, int page) {
         player.openInventory(arrayInventory[page]);
     }
 
-    public static Inventory[] getArrayInventory(){
+    public static Inventory[] getArrayInventory() {
         return arrayInventory;
     }
 
-    public static int GetGUIPage(Inventory checkInventory){
-        int i=0;
-        for(Inventory inventory: arrayInventory){
-            if(checkInventory==inventory){
+    public static int getGUIPage(Inventory checkInventory) {
+        int i = 0;
+        for (Inventory inventory : arrayInventory) {
+            if (checkInventory == inventory) {
                 return i;
             }
             i++;

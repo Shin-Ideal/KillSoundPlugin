@@ -8,15 +8,15 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class KillingPlayerListener implements Listener {
     @EventHandler
-    public void onKill(PlayerDeathEvent event){
+    public void onKill(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        if(player.getKiller()==null){
+        if (player.getKiller() == null) {
             return;
         }
         Player killer = player.getKiller();
-        if(KillSoundManager.GetKillSound(killer.getUniqueId())==null) {
+        if (KillSoundManager.getKillSound(killer.getUniqueId()) == null) {
             return;
         }
-        KillSoundManager.GetKillSound(killer.getUniqueId()).play(player);
+        KillSoundManager.getKillSound(killer.getUniqueId()).play(player);
     }
 }
